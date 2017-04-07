@@ -1,27 +1,35 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { createStore } from 'redux'
+import { connect } from 'react-redux'
+import { Provider } from 'react-redux'
 
-class Messages {
-  constructor() {
-    this.containerDOM = document.getElementById('messages')
-    this.data = JSON.parse(this.containerDOM.dataset.messages)
-    this.render()
-  }
-
-  push(message) {
-    this.data.push(message)
-    this.render()
-  }
-
-  render() {
-    ReactDOM.render(
-      <MessageList messages={this.data} />,
-      this.containerDOM
-    )
+export function addMessage(message) {
+  return {
+    type: 'ADD_MSG',
+    message
   }
 }
 
-class MessageList extends React.Component {
+const initialState = {
+  messages: []
+}
+
+function messageApp(state = initialState, action) {
+  switch (action.type) {
+    case 'ADD_MSG':
+      return Object.assign({}, state, {
+        messages: [
+          ...state.messages,
+          action.message
+        ]
+      })
+    default:
+      return state
+  }
+}
+
+class Messages extends React.Component {
   render() {
     return (
       <ul>
@@ -33,6 +41,25 @@ class MessageList extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    messages: state.messages
+  }
+}
+
+const MessageList = connect(
+  mapStateToProps
+)(Messages)
+
+
 document.addEventListener('DOMContentLoaded', () => {
-  window.messages = new Messages()
+  const containerDOM = document.getElementById('messages')
+  const messages = JSON.parse(containerDOM.dataset.messages)
+  window.store = createStore(messageApp, { messages: messages })
+  ReactDOM.render(
+    <Provider store={store}>
+      <MessageList />
+    </Provider>,
+    containerDOM
+  )
 })

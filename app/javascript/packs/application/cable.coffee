@@ -1,4 +1,5 @@
 import ActionCable from 'actioncable'
+import { addMessage } from './messages'
 
 window.Cable = {}
 Cable.consumer = ActionCable.createConsumer()
@@ -12,4 +13,4 @@ Cable.message = Cable.consumer.subscriptions.create "MessageChannel",
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
-    window.messages.push(data)
+    window.store.dispatch(addMessage(data))
