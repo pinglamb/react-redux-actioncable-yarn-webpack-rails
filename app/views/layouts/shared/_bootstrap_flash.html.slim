@@ -1,0 +1,6 @@
+.alert-wrapper.go
+  - flash.each do |type, message|
+    - type = :success if type.to_sym == :notice
+    - type = :danger  if type.to_sym == :alert
+    .alert.alert-dismissible.fade.show class="alert-#{type}"
+      = message

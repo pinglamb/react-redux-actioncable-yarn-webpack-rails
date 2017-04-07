@@ -1,0 +1,10 @@
+h1 Messages
+ul
+  - @messages.each do |message|
+    = render message
+
+hr
+
+= simple_form_for Message.new do |f|
+  = f.input :body, label: false
+  = f.button :submit, 'Send', class: 'btn btn-primary'

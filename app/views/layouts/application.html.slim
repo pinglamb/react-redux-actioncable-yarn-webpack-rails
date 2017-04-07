@@ -1,0 +1,28 @@
+doctype 5
+html
+  head
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
+    meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    title = content_for?(:title) ? yield(:title) : 'campfire'
+    = csrf_meta_tags
+    = favicon_link_tag '/favicon.ico'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    /! Le HTML5 shim, for IE6-8 support of HTML elements
+    /![if lt IE 9]
+      = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+    nav.navbar.navbar-toggleable-md.navbar-light.bg-faded.mb-3
+      button.navbar-toggler.navbar-toggle-right type="button" data-toggle="collapse" data-target="#navbar-content"
+      = link_to 'campfire', root_url, class: 'navbar-brand'
+      .collapse.navbar-collapse#navbar-content
+        ul.navbar-nav.mr-auto
+          li.nav-item = link_to 'Link 1', '#', class: 'nav-link'
+          li.nav-item = link_to 'Link 2', '#', class: 'nav-link'
+          li.nav-item = link_to 'Link 3', '#', class: 'nav-link'
+
+    .container
+      = bootstrap_flash
+      = yield
