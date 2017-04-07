@@ -1,7 +1,6 @@
 h1 Messages
-ul#messages
-  - @messages.each do |message|
-    = render message
+
+#messages data-messages=@messages.to_json(only: %i(id body))
 
 hr
 

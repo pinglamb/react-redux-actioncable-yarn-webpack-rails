@@ -1,6 +1,6 @@
 import ActionCable from 'actioncable'
 
-Cable = {}
+window.Cable = {}
 Cable.consumer = ActionCable.createConsumer()
 
 Cable.message = Cable.consumer.subscriptions.create "MessageChannel",
@@ -12,6 +12,4 @@ Cable.message = Cable.consumer.subscriptions.create "MessageChannel",
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
-    $("#messages").append data.dom
-
-export default Cable
+    window.messages.push(data)

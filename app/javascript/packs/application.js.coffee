@@ -1,1 +1,2 @@
-import Cable from './application/cable'
+import './application/cable'
+import './application/messages'
