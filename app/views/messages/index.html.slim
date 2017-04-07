@@ -1,10 +1,10 @@
 h1 Messages
-ul
+ul#messages
   - @messages.each do |message|
     = render message
 
 hr
 
-= simple_form_for Message.new do |f|
+= simple_form_for Message.new, remote: true do |f|
   = f.input :body, label: false
   = f.button :submit, 'Send', class: 'btn btn-primary'
