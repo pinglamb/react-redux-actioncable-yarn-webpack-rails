@@ -16,5 +16,4 @@
 #= require tether/dist/js/tether
 #= require bootstrap/dist/js/bootstrap
 #= require cocoon
-#= require cable
 #= require_self
